@@ -4,8 +4,9 @@ import os
 import time
 from openai import OpenAI
 
+openai_api_key=os.environ["OPENAI_API_TOKEN"]
 os.environ["REPLICATE_API_TOKEN"]="r8_LD9M7nmVwtXPsDbWqMS8tMNKVo4047O4LbpGG"
-model = OpenAI(api_key="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")
+model = OpenAI(api_key="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")
 app = Flask(__name__)
 
 r = ""
@@ -57,6 +58,18 @@ def image_result():
     )
     time.sleep(10)
     return(render_template("image_result.html",r=r[0]))
+
+@app.route("/recreat",methods=["GET","POST"])
+def recreat():
+    q = request.form.get("q")
+    r = replicate.run(
+    "stability-ai/stable-diffusion:db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf",
+    input={
+        "prompt": q,
+        }
+    )
+    time.sleep(10)
+    return(render_template("image_result.html",r=r[1]))
 
 @app.route("/ntu",methods=["GET","POST"])
 def ntu():
