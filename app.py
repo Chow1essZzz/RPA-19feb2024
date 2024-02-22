@@ -60,8 +60,8 @@ def image_result():
     time.sleep(10)
     return(render_template("image_result.html",r=r[0]))
 
-@app.route("/recreat",methods=["GET","POST"])
-def recreat():
+@app.route("/recreate",methods=["GET","POST"])
+def recreate():
     r = replicate.run(
     "stability-ai/stable-diffusion:db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf",
     input={
@@ -69,7 +69,7 @@ def recreat():
         }
     )
     time.sleep(10)
-    return(render_template("recreat.html",r=r[0]))
+    return(render_template("recreate.html",r=r[0]))
 
 @app.route("/ntu",methods=["GET","POST"])
 def ntu():
