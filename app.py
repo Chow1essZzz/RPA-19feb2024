@@ -71,9 +71,13 @@ def recreate():
     time.sleep(10)
     return(render_template("recreate.html",r=r[0]))
 
-@app.route("/ntu",methods=["GET","POST"])
-def ntu():
-    return(render_template("ntu.html"))
+@app.route("/NTU",methods=["GET","POST"])
+def NTU():
+    return(render_template("NTU.html"))
+    
+@app.route("/more_NTU",methods=["GET","POST"])
+def more_NTU():
+    return(render_template("more_NTU.html"))
 
 @app.route("/end",methods=["GET","POST"])
 def end():
