@@ -29,7 +29,7 @@ def text_gpt():
 
 @app.route("/text_result",methods=["GET","POST"])
 def text_result():
-    q = request.form.get("q")
+    global q = request.form.get("q")
     r = model.chat.completions.create(
         model = "gpt-3.5-turbo",
         messages = [
