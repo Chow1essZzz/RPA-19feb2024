@@ -69,7 +69,7 @@ def recreat():
         }
     )
     time.sleep(10)
-    return(render_template("image_result.html",r=r[1]))
+    return(render_template("recreat.html",r=r[0]))
 
 @app.route("/ntu",methods=["GET","POST"])
 def ntu():
