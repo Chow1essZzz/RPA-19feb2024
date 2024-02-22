@@ -4,10 +4,8 @@ import os
 import time
 from openai import OpenAI
 
-openai_api_key=os.getenv("OPENAI_API_TOKEN")
 os.environ["REPLICATE_API_TOKEN"]="r8_LD9M7nmVwtXPsDbWqMS8tMNKVo4047O4LbpGG"
-
-model=OpenAI(api_key=openai_api_key)
+model = OpenAI(api_key="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")
 
 app = Flask(__name__)
 
@@ -26,23 +24,23 @@ def main():
         first_time=0
     return(render_template("main.html",r=r))
 
-@app.route("/test_gpt",methods=["GET","POST"])
-def test_gpt():
-    return(render_template("test_gpt.html"))
+@app.route("/text_gpt",methods=["GET","POST"])
+def text_gpt():
+    return(render_template("text_gpt.html"))
 
-@app.route("/test_result",methods=["GET","POST"])
-def test_result():
+@app.route("/text_result",methods=["GET","POST"])
+def text_result():
     q = request.form.get("q")
     r = model.chat.completions.create(
-    model = "gpt-3.5-turbo",
-    messages=[
-        {
-            "role" : "user"
-            "content" : q
-        }
-    ]
+        model = "gpt-3.5-turbo",
+        messages = [
+         {
+           "role": "user",
+           "content" : q
+         }
+      ]
     )
-    time.sleep(5)
+    time.sleep(5)   
     return(render_template("text_result.html",r=r.choices[0].message.content))
 
 @app.route("/image_gpt",methods=["GET","POST"])
@@ -58,6 +56,12 @@ def image_result():
         "prompt": q,
         }
     )
+    time.sleep(10)
+    return(render_template("image_result.html",r=r[0]))
+
+@app.route("/ntu",methods=["GET","POST"])
+def ntu():
+    return(render_template("ntu.html"))
 
 @app.route("/end",methods=["GET","POST"])
 def end():
